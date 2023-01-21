@@ -29,7 +29,7 @@ function checkTradeExists(id) {
             if (error) {
                 return reject(error);
             }
-            return resolve(result);
+            return resolve(result[0]?.id);
         });
     });
 }
