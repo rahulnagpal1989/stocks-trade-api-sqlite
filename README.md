@@ -63,6 +63,37 @@ The response of the GET request is the following JSON array with the HTTP respon
 ]
 ```
 
+**GET Request** `/trades/users/1619820/buy`
+The response of the GET request will show only buy trades is the following JSON array with the HTTP response code 200:
+```
+[
+  {
+    "id":1000344,
+    "type":"buy",
+    "user":{
+      "id":1619820,
+      "name":"David"
+    },
+    "stock_symbol":"AC",
+    "stock_quantity":28,
+    "stock_price":162.17,
+    "trade_timestamp":"2014-06-14 13:13:13"
+  },
+  {
+    "id":1338585,
+    "type":"buy",
+    "user":{
+      "id":1619820,
+      "name":"David"
+    },
+    "stock_symbol":"ABR",
+    "stock_quantity":12,
+    "stock_price":137.39,
+    "trade_timestamp":"2014-06-25 13:44:13"
+  }
+]
+```
+
 **GET Request** `/stocks/ACC/trades?type=sell&start=2014-06-27&end=2014-06-27`
 As there are no trades for the stock in the given date range, so the response is an empty JSON array with the HTTP response code 200.
 GET Request /stocks/ACC/price?start=2014-06-25&end=2014-06-26
