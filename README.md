@@ -30,6 +30,7 @@ Consider the following POST requests (these are performed in the ascending order
   "stock_price":162.17,
   "trade_timestamp":"2014-06-14 13:13:13"
 }
+```
 
 **GET Request** `/trades/users/1619820`
 The response of the GET request is the following JSON array with the HTTP response code 200:
