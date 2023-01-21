@@ -66,7 +66,7 @@ function getUserTrades(user_id, type='') {
             if (error) {
                 return reject(error);
             }
-            return resolve(result[0].id);
+            return resolve(result);
         });
     });
 }
