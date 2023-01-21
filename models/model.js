@@ -22,8 +22,16 @@ const db = new sqlite3.Database(':memory:', (err) => {
     });
 });
 
-let stocks = "stocks";
-let users = "users";
+function checkTradeExists(id) {
+    return new Promise((resolve, reject) => {
+        db.all("SELECT id FROM stocks WHERE id = ? ", [id], function(error, result) {
+            if (error) {
+                return reject(error);
+            }
+            return resolve(result);
+        });
+    });
+}
 
 function insertTrade(id, type, user, stock_symbol, stock_quantity, stock_price, trade_timestamp) {
     return new Promise((resolve, reject) => {
@@ -46,13 +54,19 @@ function insertTrade(id, type, user, stock_symbol, stock_quantity, stock_price, 
     });
 }
 
-function getUserTrades(user_id) {
+function getUserTrades(user_id, type='') {
+    let sqlParams = [user_id];
+    let addon = '';
+    if(type!=='') {
+        addon = ' AND type = ?';
+        sqlParams.push(type);
+    }
     return new Promise((resolve, reject) => {
-        db.all("SELECT * FROM stocks WHERE user = ?", [user_id], function(error, result) {
+        db.all("SELECT * FROM stocks WHERE user = ? "+addon, sqlParams, function(error, result) {
             if (error) {
                 return reject(error);
             }
-            return resolve(result);
+            return resolve(result[0].id);
         });
     });
 }
@@ -80,6 +94,7 @@ function deleteStocks(stock, start_date, end_date) {
 }
 
 module.exports = {
+    checkTradeExists,
     insertTrade,
     getUserTrades,
     getStockPrices,
