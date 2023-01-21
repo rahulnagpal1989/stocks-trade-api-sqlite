@@ -5,6 +5,7 @@ const {homePage, insertTrade, getUserTrades, deleteStocks, stocks} = require('..
 
 router.post('/trades', insertTrade);
 router.get('/trades/users/:id', getUserTrades);
+router.get('/trades/users/:id/:type', getUserTrades);
 router.delete('/delete', deleteStocks);
 router.get('/stocks/:stock/price', stocks);
 router.get('/', homePage);
