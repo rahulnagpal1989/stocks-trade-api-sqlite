@@ -10,7 +10,8 @@ const db = new sqlite3.Database(':memory:', (err) => {
     let sql = `CREATE TABLE IF NOT EXISTS users(id integer PRIMARY KEY, name TEXT NOT NULL)`;
     db.run(sql, [], function(err) {
         if (err) {
-            return console.log('Error:', err.message);
+            console.log('Error:', err.message);
+            return err;
         }
         // get the last insert id
         console.log(`created table "users"`);
@@ -46,7 +47,6 @@ function insertTrade(id, type, user, stock_symbol, stock_quantity, stock_price, 
         ];
         db.run("INSERT INTO stocks VALUES (?, ?, ?, ?, ?, ?, ?)", sqlParams, function(error, result) {
             if (error) {
-                console.log(error);
                 return reject(error);
             }
             return resolve(this.lastID);
